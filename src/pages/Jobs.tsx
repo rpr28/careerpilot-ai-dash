@@ -236,7 +236,7 @@ export default function Jobs() {
                         <DialogHeader>
                           <DialogTitle>Apply to {selectedJob?.title}</DialogTitle>
                           <DialogDescription>
-                            CareerPilot will tailor your resume to match this job's requirements and submit your application.
+                            PathPilot will tailor your resume to match this job's requirements and submit your application.
                           </DialogDescription>
                         </DialogHeader>
                         <div className="py-4">

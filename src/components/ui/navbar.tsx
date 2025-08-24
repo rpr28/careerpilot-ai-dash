@@ -14,7 +14,7 @@ export function Navbar() {
       <div className="flex h-16 items-center justify-between px-6">
         <div className="flex items-center space-x-4">
           <h1 className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-            CareerPilot
+            PathPilot
           </h1>
           <p className="text-sm text-muted-foreground hidden md:block">
             Your AI Career Assistant
