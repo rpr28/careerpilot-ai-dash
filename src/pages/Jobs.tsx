@@ -57,8 +57,8 @@ const sampleJobs: Job[] = [
 
 export default function Jobs() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [locationFilter, setLocationFilter] = useState("");
-  const [experienceFilter, setExperienceFilter] = useState("");
+  const [locationFilter, setLocationFilter] = useState("all-locations");
+  const [experienceFilter, setExperienceFilter] = useState("all-levels");
   const [filteredJobs, setFilteredJobs] = useState(sampleJobs);
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
 
@@ -72,13 +72,13 @@ export default function Jobs() {
       );
     }
     
-    if (locationFilter) {
+    if (locationFilter && locationFilter !== "all-locations") {
       filtered = filtered.filter(job => 
         job.location.toLowerCase().includes(locationFilter.toLowerCase())
       );
     }
     
-    if (experienceFilter) {
+    if (experienceFilter && experienceFilter !== "all-levels") {
       filtered = filtered.filter(job => job.experience === experienceFilter);
     }
     
@@ -124,7 +124,7 @@ export default function Jobs() {
                 <SelectValue placeholder="Location" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Locations</SelectItem>
+                <SelectItem value="all-locations">All Locations</SelectItem>
                 <SelectItem value="san francisco">San Francisco, CA</SelectItem>
                 <SelectItem value="new york">New York, NY</SelectItem>
                 <SelectItem value="austin">Austin, TX</SelectItem>
@@ -137,7 +137,7 @@ export default function Jobs() {
                 <SelectValue placeholder="Experience Level" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Levels</SelectItem>
+                <SelectItem value="all-levels">All Levels</SelectItem>
                 <SelectItem value="0-1 years">Entry Level (0-1 years)</SelectItem>
                 <SelectItem value="2-4 years">Mid Level (2-4 years)</SelectItem>
                 <SelectItem value="3-5 years">Senior Level (3-5 years)</SelectItem>
@@ -154,8 +154,8 @@ export default function Jobs() {
               variant="outline" 
               onClick={() => {
                 setSearchTerm("");
-                setLocationFilter("");
-                setExperienceFilter("");
+                setLocationFilter("all-locations");
+                setExperienceFilter("all-levels");
                 setFilteredJobs(sampleJobs);
               }}
             >
