@@ -51,10 +51,11 @@ const SignUp = () => {
 
       if (data.user) {
         toast({
-          title: "Welcome to PathPilot!",
-          description: "Please check your email to verify your account.",
+          title: "Account Created Successfully!",
+          description: "Please check your email to verify your account before signing in.",
         });
-        navigate("/");
+        // Don't automatically log in - redirect to sign in page
+        navigate("/sign-in");
       }
     } catch (err) {
       setError("An unexpected error occurred. Please try again.");
