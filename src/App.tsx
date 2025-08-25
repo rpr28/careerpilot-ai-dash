@@ -25,42 +25,49 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <SidebarProvider>
-          <div className="min-h-screen flex w-full">
-            <AppSidebar />
-            <div className="flex-1 flex flex-col">
-              <Navbar />
-              <main className="flex-1 p-6 bg-gradient-subtle">
-                <Routes>
-                  <Route path="/sign-up" element={<SignUp />} />
-                  <Route path="/sign-in" element={<SignIn />} />
-                  <Route path="/" element={
-                    <ProtectedRoute>
-                      <Dashboard />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/resume" element={
-                    <ProtectedRoute>
-                      <Resume />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/jobs" element={
-                    <ProtectedRoute>
-                      <Jobs />
-                    </ProtectedRoute>
-                  } />
-                  <Route path="/courses" element={
-                    <ProtectedRoute>
-                      <Courses />
-                    </ProtectedRoute>
-                  } />
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </main>
-            </div>
-          </div>
-        </SidebarProvider>
+        <Routes>
+          {/* Auth routes without navigation */}
+          <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/sign-in" element={<SignIn />} />
+          
+          {/* Protected routes with navigation */}
+          <Route path="/*" element={
+            <SidebarProvider>
+              <div className="min-h-screen flex w-full">
+                <AppSidebar />
+                <div className="flex-1 flex flex-col">
+                  <Navbar />
+                  <main className="flex-1 p-6 bg-gradient-subtle">
+                    <Routes>
+                      <Route path="/" element={
+                        <ProtectedRoute>
+                          <Dashboard />
+                        </ProtectedRoute>
+                      } />
+                      <Route path="/resume" element={
+                        <ProtectedRoute>
+                          <Resume />
+                        </ProtectedRoute>
+                      } />
+                      <Route path="/jobs" element={
+                        <ProtectedRoute>
+                          <Jobs />
+                        </ProtectedRoute>
+                      } />
+                      <Route path="/courses" element={
+                        <ProtectedRoute>
+                          <Courses />
+                        </ProtectedRoute>
+                      } />
+                      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                      <Route path="*" element={<NotFound />} />
+                    </Routes>
+                  </main>
+                </div>
+              </div>
+            </SidebarProvider>
+          } />
+        </Routes>
       </BrowserRouter>
     </TooltipProvider>
     </AuthProvider>
