@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Briefcase, MapPin, Search, Filter, ExternalLink, Sparkles } from "lucide-react";
+import { Briefcase, MapPin, Search, Filter, ExternalLink, Sparkles, CheckCircle, FileText, GraduationCap, ArrowRight } from "lucide-react";
 
 interface Job {
   id: string;
@@ -98,6 +98,69 @@ export default function Jobs() {
         <h1 className="text-3xl font-bold">Job Matches</h1>
       </div>
 
+      {/* Progress Indicator */}
+      <Card className="shadow-soft border-primary/20">
+        <CardContent className="pt-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-success" />
+              <span className="font-medium">Step 1: Resume Builder ✓</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-success" />
+              <span className="font-medium">Step 2: Course Recommendations ✓</span>
+            </div>
+            <Badge variant="secondary" className="bg-primary/10 text-primary">
+              Step 3: Job Matches
+            </Badge>
+          </div>
+          <div className="w-full bg-muted rounded-full h-2">
+            <div className="bg-primary h-2 rounded-full w-full transition-all duration-300"></div>
+          </div>
+          <p className="text-sm text-muted-foreground mt-2">
+            Job matches based on your resume analysis and selected courses
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Profile Summary */}
+      <Card className="shadow-soft border-accent/20">
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <Sparkles className="h-5 w-5 text-accent" />
+            <CardTitle className="text-lg">Your Enhanced Profile</CardTitle>
+          </div>
+          <CardDescription>
+            Your resume and course selections have been analyzed to find the best job matches
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 rounded-lg bg-primary/10 border border-primary/20">
+              <div className="flex items-center gap-2 mb-2">
+                <FileText className="h-4 w-4 text-primary" />
+                <span className="font-medium text-sm text-primary">Resume Skills</span>
+              </div>
+              <p className="text-xs text-muted-foreground">JavaScript, React, Frontend Development</p>
+            </div>
+            <div className="p-4 rounded-lg bg-success/10 border border-success/20">
+              <div className="flex items-center gap-2 mb-2">
+                <GraduationCap className="h-4 w-4 text-success" />
+                <span className="font-medium text-sm text-success">Enhanced Skills</span>
+              </div>
+              <p className="text-xs text-muted-foreground">TypeScript, Product Management, Data Analysis</p>
+            </div>
+            <div className="p-4 rounded-lg bg-accent/10 border border-accent/20">
+              <div className="flex items-center gap-2 mb-2">
+                <Briefcase className="h-4 w-4 text-accent" />
+                <span className="font-medium text-sm text-accent">Target Roles</span>
+              </div>
+              <p className="text-xs text-muted-foreground">Frontend Engineer, Product Manager, Data Analyst</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
       {/* Search and Filters */}
       <Card className="shadow-soft">
         <CardHeader>
@@ -106,7 +169,7 @@ export default function Jobs() {
             Search & Filter Jobs
           </CardTitle>
           <CardDescription>
-            Find opportunities that match your skills and preferences
+            Find opportunities that match your enhanced skill profile
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -276,6 +339,31 @@ export default function Jobs() {
           ))
         )}
       </div>
+
+      {/* Journey Complete */}
+      <Card className="shadow-soft border-success/20 bg-success/5">
+        <CardContent className="pt-6">
+          <div className="text-center space-y-4">
+            <div className="flex items-center justify-center gap-2">
+              <CheckCircle className="h-6 w-6 text-success" />
+              <span className="font-medium text-success">Journey Complete!</span>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              You've successfully built your resume, enhanced your skills, and found job matches. Your career journey is ready to take off!
+            </p>
+            <div className="flex justify-center gap-4">
+              <Button variant="outline" size="sm">
+                <FileText className="mr-2 h-4 w-4" />
+                Update Resume
+              </Button>
+              <Button variant="outline" size="sm">
+                <GraduationCap className="mr-2 h-4 w-4" />
+                Browse More Courses
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

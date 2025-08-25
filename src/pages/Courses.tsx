@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { GraduationCap, Clock, TrendingUp, ExternalLink, Sparkles } from "lucide-react";
+import { GraduationCap, Clock, TrendingUp, ExternalLink, Sparkles, ArrowRight, CheckCircle, Briefcase, FileText } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface Course {
   id: string;
@@ -92,6 +93,8 @@ const recommendedCourses: Course[] = [
 ];
 
 export default function Courses() {
+  const navigate = useNavigate();
+
   const getLevelColor = (level: string) => {
     switch (level) {
       case "Beginner":
@@ -118,12 +121,75 @@ export default function Courses() {
     }
   };
 
+  const handleContinueToJobs = () => {
+    navigate("/jobs");
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-2 mb-6">
         <GraduationCap className="h-6 w-6 text-primary" />
         <h1 className="text-3xl font-bold">Course Recommendations</h1>
       </div>
+
+      {/* Progress Indicator */}
+      <Card className="shadow-soft border-primary/20">
+        <CardContent className="pt-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-success" />
+              <span className="font-medium">Step 1: Resume Builder ✓</span>
+            </div>
+            <Badge variant="secondary" className="bg-primary/10 text-primary">
+              Step 2: Course Recommendations
+            </Badge>
+          </div>
+          <div className="w-full bg-muted rounded-full h-2">
+            <div className="bg-primary h-2 rounded-full w-1/2 transition-all duration-300"></div>
+          </div>
+          <p className="text-sm text-muted-foreground mt-2">
+            Based on your resume analysis, here are courses to enhance your skills
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Resume Analysis Summary */}
+      <Card className="shadow-soft border-accent/20">
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <FileText className="h-5 w-5 text-accent" />
+            <CardTitle className="text-lg">Resume Analysis</CardTitle>
+          </div>
+          <CardDescription>
+            AI analysis of your resume identified these skill gaps and opportunities
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 rounded-lg bg-success/10 border border-success/20">
+              <div className="flex items-center gap-2 mb-2">
+                <CheckCircle className="h-4 w-4 text-success" />
+                <span className="font-medium text-sm text-success">Strong Skills</span>
+              </div>
+              <p className="text-xs text-muted-foreground">JavaScript, React, Frontend Development</p>
+            </div>
+            <div className="p-4 rounded-lg bg-warning/10 border border-warning/20">
+              <div className="flex items-center gap-2 mb-2">
+                <TrendingUp className="h-4 w-4 text-warning" />
+                <span className="font-medium text-sm text-warning">Growth Areas</span>
+              </div>
+              <p className="text-xs text-muted-foreground">TypeScript, Product Management, Data Analysis</p>
+            </div>
+            <div className="p-4 rounded-lg bg-primary/10 border border-primary/20">
+              <div className="flex items-center gap-2 mb-2">
+                <Sparkles className="h-4 w-4 text-primary" />
+                <span className="font-medium text-sm text-primary">Target Roles</span>
+              </div>
+              <p className="text-xs text-muted-foreground">Frontend Engineer, Product Manager</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Recommended for You Section */}
       <Card className="shadow-medium bg-gradient-card border-primary/20">
@@ -133,7 +199,7 @@ export default function Courses() {
             <CardTitle className="text-xl">Recommended for You</CardTitle>
           </div>
           <CardDescription>
-            AI-curated courses based on your skill gaps and career goals
+            AI-curated courses based on your resume analysis and career goals
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -197,6 +263,30 @@ export default function Courses() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Continue to Jobs Section */}
+      <Card className="shadow-soft border-success/20 bg-success/5">
+        <CardContent className="pt-6">
+          <div className="text-center space-y-4">
+            <div className="flex items-center justify-center gap-2">
+              <CheckCircle className="h-6 w-6 text-success" />
+              <span className="font-medium text-success">Courses Selected!</span>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Great! Now let's find job opportunities that match your enhanced skill profile.
+            </p>
+            <Button 
+              size="lg" 
+              className="w-full bg-gradient-primary hover:shadow-glow transition-all duration-300"
+              onClick={handleContinueToJobs}
+            >
+              <Briefcase className="mr-2 h-5 w-5" />
+              Continue to Job Matches
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
           </div>
         </CardContent>
       </Card>
