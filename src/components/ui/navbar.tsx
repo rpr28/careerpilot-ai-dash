@@ -7,8 +7,21 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Settings, LogOut, User } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 export function Navbar() {
+  const { user, signOut } = useAuth();
+
+  // If no user is logged in, don't show the navbar
+  if (!user) {
+    return null;
+  }
+
+  const handleLogout = async () => {
+    await signOut();
+  };
+
   return (
     <nav className="border-b border-border bg-card/50 backdrop-blur-sm sticky top-0 z-50">
       <div className="flex h-16 items-center justify-between px-6">
@@ -36,7 +49,10 @@ export function Navbar() {
               Settings
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer text-destructive focus:text-destructive">
+            <DropdownMenuItem 
+              className="cursor-pointer text-destructive focus:text-destructive"
+              onClick={handleLogout}
+            >
               <LogOut className="mr-2 h-4 w-4" />
               Logout
             </DropdownMenuItem>
